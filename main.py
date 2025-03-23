@@ -1,6 +1,7 @@
 ZADANIA_OPCJE = [1, 2, 3]
 DZIALANIA_OPCJE = ["+", "-", "*", "/"]
 KONWERSJE_OPCJE = ["f", "c"]
+OCENY_OPCJE = [1, 2, 3, 4, 5, 6]
 
 # Funkcja do zadania 1 - kalkulator
 def kalkulator(liczba1, liczba2, dzialanie):
@@ -22,7 +23,13 @@ def konwerter_temperatur(kierunek_konwersji, temperatura):
         return temperatura * 1.8 + 32
     elif kierunek_konwersji == "f":
         return (temperatura - 32) / 1.8
-    
+
+# Funkcja do obliczania średniej ocen
+def oblicz_srednia(lista_ocen):
+    suma_ocen = 0
+    for ocena in lista_ocen:
+        suma_ocen += ocena
+    return suma_ocen / len(lista_ocen)
 
 # Obsługa logiki programu
 def main():
@@ -55,6 +62,22 @@ def main():
         przelicznik_string = "Farenheita" if przelicznik == "c" else "Celcjusza"
         print(f"Otrzymany wynik: {wynik} stopni {przelicznik_string}")
 
+    elif wybrane_zadanie == 3:
+        print("Wpisz ile ocen podasz.")
+        ilosc_ocen = int(input())
+        lista_ocen = []
+        for i in range(0, ilosc_ocen):
+            print(f"Podaj ocenę numer: {i + 1}")
+            ocena = int(input())
+            if ocena not in OCENY_OPCJE:
+                raise ValueError("Wprowadzono niepoprawną wartość!")
+            lista_ocen.append(ocena)
+        srednia = oblicz_srednia(lista_ocen)
+        print(f"Średnia ocen ucznia: {srednia}")
+        if srednia >= 3.0:
+            print("Uczeń zdał")
+        else:
+            print("Uczeń nie zdał")
     
 
 if __name__ == "__main__":
